@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +30,18 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
-	
-	
+
+	@RequestMapping(value="/examine/{articleId}",method = RequestMethod.PUT)
+	public Result updateState(@PathVariable String articleId){
+		articleService.updateState(articleId);
+		return new Result(true,StatusCode.OK,"更新成功");
+	}
+
+	@RequestMapping(value="/thumbup/{articleId}",method = RequestMethod.PUT)
+	public Result addThumbup(@PathVariable String articleId){
+		articleService.addThumbup(articleId);
+		return new Result(true,StatusCode.OK,"点赞成功");
+	}
 	/**
 	 * 查询全部数据
 	 * @return
