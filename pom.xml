@@ -12,6 +12,8 @@
         <module>project_base</module>
         <module>project_recruit</module>
         <module>project_qa</module>
+        <module>project_article</module>
+
 
 
     </modules>
