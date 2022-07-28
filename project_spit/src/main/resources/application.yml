@@ -1,0 +1,9 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: project_spit
+  data:
+    mongodb:
+      host: 192.168.121.128
+      database: spitdb
