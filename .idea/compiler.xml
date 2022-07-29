@@ -6,13 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="project_recruit" />
-        <module name="project_common" />
         <module name="project_spit" />
+        <module name="project_common" />
         <module name="project_qa" />
         <module name="project_base" />
         <module name="project_gathering" />
         <module name="project_article" />
+        <module name="project_recruit" />
+        <module name="project_search" />
       </profile>
     </annotationProcessing>
   </component>

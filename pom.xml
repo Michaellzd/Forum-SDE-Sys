@@ -15,6 +15,7 @@
         <module>project_article</module>
         <module>project_gathering</module>
         <module>project_spit</module>
+        <module>project_search</module>
 
 
     </modules>
