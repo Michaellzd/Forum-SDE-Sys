@@ -1,9 +1,7 @@
 package com.demo.user.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,11 +10,15 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.ReactiveRedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import util.IdWorker;
@@ -32,6 +34,12 @@ import com.demo.user.pojo.User;
  */
 @Service
 public class UserService {
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 
 	@Autowired
 	private UserDao userDao;
@@ -87,6 +95,12 @@ public class UserService {
 	 */
 	public void add(User user) {
 		user.setId( idWorker.nextId()+"" );
+		user.setFollowcount(0);//关注数
+		user.setFanscount(0);//粉丝数
+		user.setOnline(0L);//在线时长
+		user.setRegdate(new Date());//注册日期
+		user.setUpdatedate(new Date());//更新日期
+		user.setLastdate(new Date());//最后登陆日期
 		userDao.save(user);
 	}
 
@@ -166,4 +180,19 @@ public class UserService {
 
 	}
 
+    public void sendSMS(String mobile) {
+		//生成6位数字随机数
+		String checkcode= RandomStringUtils.randomNumeric(6);
+
+		//缓存中放一份
+		redisTemplate.opsForValue().set("checkcode_"+mobile,checkcode,6, TimeUnit.HOURS);
+
+		Map<String,String> map=new HashMap<>();
+		map.put("mobile",mobile);
+		map.put("checkcode",checkcode);
+		 //user sending
+		rabbitTemplate.convertAndSend("SMS",map);
+		//testing
+		System.out.println("验证码"+checkcode);
+    }
 }

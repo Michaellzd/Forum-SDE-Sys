@@ -18,6 +18,9 @@
         <module>project_search</module>
         <module>project_rabbitmqtest</module>
         <module>project_user</module>
+        <module>project_sms</module>
+
+
     </modules>
     <packaging>pom</packaging>
 
