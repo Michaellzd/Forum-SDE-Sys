@@ -17,8 +17,7 @@
         <module>project_spit</module>
         <module>project_search</module>
         <module>project_rabbitmqtest</module>
-        <module>userproj</module>
-
+        <module>project_user</module>
     </modules>
     <packaging>pom</packaging>
 
