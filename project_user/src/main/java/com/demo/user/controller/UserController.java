@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,20 @@ public class UserController {
 
 	@Autowired
 	private RedisTemplate redisTemplate;
+
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public Result login(@RequestBody User user){
+		user = userService.login(user.getMobile(),user.getPassword());
+		if(user == null){
+			return new Result(false,StatusCode.LOGINERROR,"登陆失败");
+		}
+		return new Result(true,StatusCode.OK,"登陆成功");
+
+	}
 
 	//发送短信验证码
 	@RequestMapping(value="/sendsms/{mobile}",method = RequestMethod.POST)
