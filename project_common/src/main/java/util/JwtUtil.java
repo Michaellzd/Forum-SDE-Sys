@@ -1,5 +1,6 @@
 package util;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -48,7 +49,8 @@ public class JwtUtil {
         JwtBuilder builder = Jwts.builder().setId(id)
                 .setSubject(subject)
                 .setIssuedAt(now)
-                .signWith(SignatureAlgorithm.HS256, key).claim("roles", roles);
+                .signWith(SignatureAlgorithm.HS256, key)
+                .claim("roles", roles);
         if (ttl > 0) {
             builder.setExpiration( new Date( nowMillis + ttl));
         }
@@ -60,11 +62,11 @@ public class JwtUtil {
      * @param jwtStr
      * @return
      */
-    public Claims parseJWT(String jwtStr){
+    /*public Claims parseJWT(String jwtStr){
         return  Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwtStr)
                 .getBody();
-    }
+    }*/
 
 }
