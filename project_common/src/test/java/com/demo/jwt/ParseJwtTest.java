@@ -9,7 +9,7 @@ public class ParseJwtTest  {
 
     public static void main(String[] args) throws Exception {
         Claims claims = Jwts.parser().setSigningKey("itcast")
-                .parseClaimsJws("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NjYiLCJzdWIiOiLlsI_pqawiLCJpYXQiOjE2NjA2NTg2OTEsImV4cCI6MTY2MDY1ODc1MSwicm9sZSI6ImFkbWluIn0.fTn5QSYZRLZT9gjCWCQ0qArneeFxqsEThMjFSbPabDY")
+                .parseClaimsJws("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NjYiLCJzdWIiOiLlsI_pqawiLCJpYXQiOjE2NjA2NzM3OTgsImV4cCI6MTY2MDY3Mzg1OCwicm9sZSI6ImFkbWluIn0.G8HFhY0RRDINeOtYoXQ8okFgh8C8nh1WLrToutkiEhY")
                 .getBody();
         System.out.println(claims.getId());
         System.out.println(claims.getSubject());

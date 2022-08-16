@@ -62,11 +62,11 @@ public class JwtUtil {
      * @param jwtStr
      * @return
      */
-    /*public Claims parseJWT(String jwtStr){
+    public Claims parseJWT(String jwtStr){
         return  Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwtStr)
                 .getBody();
-    }*/
+    }
 
 }
