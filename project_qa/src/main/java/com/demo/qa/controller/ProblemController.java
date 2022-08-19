@@ -2,6 +2,7 @@ package com.demo.qa.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.qa.client.BaseClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +30,15 @@ public class ProblemController {
 
 	@Autowired
 	private ProblemService problemService;
+
+	@Autowired
+	private BaseClient baseClient;
+
+	@RequestMapping(value = "/label/{labelId}" , method = RequestMethod.GET)
+	public  Result findByLabelId(@PathVariable String labelId){
+		Result result = baseClient.findById(labelId);
+		return result;
+	}
 
 	@RequestMapping(value = "/newlist/{label}/{page}/{size}",method =RequestMethod.GET)
 	public Result newlist(@PathVariable String label,@PathVariable int page,@PathVariable int  size){

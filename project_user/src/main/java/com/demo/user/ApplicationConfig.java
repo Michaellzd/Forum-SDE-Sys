@@ -11,7 +11,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
     private JwtFilter jwtFilter;
     //实现拦截器功能
 
-    //public void addInterceptors(InterceptorRegistry registry){
-        //registry.addInterceptor(jwtFilter).addPathPatterns("/**").excludePathPatterns("/**/login");
-    //}
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(jwtFilter).addPathPatterns("/**").excludePathPatterns("/**/login");
+    }
 }
