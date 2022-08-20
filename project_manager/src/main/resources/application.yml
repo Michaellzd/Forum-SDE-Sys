@@ -14,3 +14,19 @@ zuul:
     project-base:
       path: /base/**
       serviceId: project-base
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: project-base
+          uri: lb://project-base
+          predicates:
+            - Path=/base/**
+          filters:
+            - StripPrefix=1
+  main:
+    web-application-type: reactive
