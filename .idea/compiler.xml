@@ -14,6 +14,7 @@
         <module name="project_base" />
         <module name="project_sms" />
         <module name="project_search" />
+        <module name="project_manager" />
         <module name="project_gathering_gathering" />
         <module name="project_rabbitmqtest" />
         <module name="project_gathering" />

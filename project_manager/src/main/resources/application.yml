@@ -1,0 +1,16 @@
+server:
+  port: 9011
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  routes:
+    project-base:
+      path: /base/**
+      serviceId: project-base

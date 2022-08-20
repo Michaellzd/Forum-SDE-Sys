@@ -21,6 +21,7 @@
         <module>project_sms</module>
         <module>project_eureka</module>
         <module>project_friend</module>
+        <module>project_manager</module>
 
 
     </modules>
