@@ -2,7 +2,7 @@ server:
   port: 9008
 spring: 
   application:  
-    name: project_user #指定服务名
+    name: project-user #指定服务名
   datasource:  
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.106.133:3306/tensquare_user?characterEncoding=UTF8
@@ -15,10 +15,14 @@ spring:
     host: 192.168.106.133
   rabbitmq:
     host: 192.168.106.133
+
+
 jwt:
   config:
      key: itcastabcdefghijklmnopqrstabcabcabcabcabcabc
      ttl: 360000
+
+
 
 eureka:
   client:
@@ -27,5 +31,7 @@ eureka:
 
   instance:
     prefer-ip-address: true
+
+
 
 

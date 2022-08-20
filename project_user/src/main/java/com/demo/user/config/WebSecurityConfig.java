@@ -14,11 +14,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    @Autowired
-    private JwtFilter jwtFilter;
-
-
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtFilter).addPathPatterns("/**").excludePathPatterns("/**/login");
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and().csrf().disable();
     }
 }
+

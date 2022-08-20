@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface FriendDao extends JpaRepository<Friend,String> {
-    @Query("select count(f) from Friend f where f.userid=?1 and f.friendid=?2")
-    public Friend findByuseridAndfriendid(String userid, String friendid);
+        public Friend findByUseridAndFriendid(String userid, String friendid);
     @Modifying
     @Query(value = "UPDATE tb_friend SET islike=? WHERE userid=? AND friendid=?",nativeQuery = true)
     public void updateislike(String islike, String userid, String friendid);
+
+    @Modifying
+    @Query(value = "delete  from  tb_friend  WHERE userid=? AND friendid=?",nativeQuery = true)
+    void deleteFriend(String userid, String friendid);
 }

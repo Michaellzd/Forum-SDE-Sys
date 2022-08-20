@@ -22,6 +22,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import com.demo.user.dao.UserDao;
@@ -49,6 +50,8 @@ public class UserService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+
 
 	/**
 	 * 查询全部列表
@@ -201,6 +204,8 @@ public class UserService {
     }
 
 	public User login(String mobile, String password) {
+		System.out.println("bbbb");
+
 		User user = userDao.findBymobile(mobile);
 		if (user != null && encoder.matches(password,user.getPassword()) ) {
 			return user;
@@ -208,5 +213,9 @@ public class UserService {
 		return null;
 	}
 
-
+	@Transactional
+	public void updatefanscountandfollowcount(int x, String userid, String friendid) {
+		userDao.updatefanscount(x,friendid);
+		userDao.updatefollowcount(x,userid);
+	}
 }
